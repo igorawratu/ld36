@@ -14,9 +14,12 @@ public class Player : MonoBehaviour {
 
     public GameObject bullet_;
 
+    private GameManager manager_;
+
     void Start () {
         last_mouse_pos_ = Input.mousePosition;
-
+        manager_ = GameManager.Instance;
+        manager_.Player = gameObject;
     }
 	
     void checkFire()
@@ -144,8 +147,8 @@ public class Player : MonoBehaviour {
         }
         
 
-        float y_rot = dif.x * Mathf.PI * Time.deltaTime * 2;
-        float x_rot = -dif.y * Mathf.PI * Time.deltaTime * 2;
+        float y_rot = dif.x * Mathf.PI * Time.deltaTime * 5;
+        float x_rot = -dif.y * Mathf.PI * Time.deltaTime * 5;
 
         gameObject.transform.Rotate(Vector3.up, y_rot, Space.World);
         gameObject.transform.Rotate(Vector3.right, x_rot);

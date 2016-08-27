@@ -21,5 +21,6 @@ public class Musket : MonoBehaviour {
         GameObject bullet = Instantiate(bullet_prefab_);
         bullet.transform.position = gameObject.transform.position;
         bullet.GetComponent<Rigidbody>().velocity = direction * 1000;
+        bullet.GetComponent<Bullet>().player = gameObject;
     }
 }
