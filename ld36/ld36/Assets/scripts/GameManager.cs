@@ -42,8 +42,6 @@ public class GameManager : Singleton<GameManager> {
         Vector3 dif = spawnPos - gameObject.transform.position;
         Vector3 dir = Vector3.Normalize(new Vector3(dif.z, 0.1f, -dif.x));
 
-        Debug.Log(spawnPos);
-
         if(dir.z < 0)
         {
             dir = -dir;

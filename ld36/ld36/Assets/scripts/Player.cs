@@ -15,11 +15,25 @@ public class Player : MonoBehaviour {
     public GameObject bullet_;
 
     private GameManager manager_;
+    private string[] anim_names_;
 
     void Start () {
         last_mouse_pos_ = Input.mousePosition;
         manager_ = GameManager.Instance;
         manager_.Player = gameObject;
+
+        anim_names_ = new string[11];
+        anim_names_[0] = "";
+        anim_names_[1] = "sway";
+        anim_names_[2] = "fire";
+        anim_names_[3] = "LowerMusket";
+        anim_names_[4] = "raiselock";
+        anim_names_[5] = "applygunpowder";
+        anim_names_[6] = "lowerfrizzen";
+        anim_names_[7] = "insertbullet";
+        anim_names_[8] = "rotate_extracted_ramrod";
+        anim_names_[9] = "rerotate_ramrod";
+        anim_names_[10] = "retract_ramrod";
     }
 	
     void checkFire()
@@ -29,6 +43,11 @@ public class Player : MonoBehaviour {
             musket.fire();
             GetComponent<Animator>().SetInteger("stage", ++stage);
         }
+    }
+
+    void lowerGun()
+    {
+        GetComponent<Animator>().SetInteger("stage", ++stage);
     }
 
     void raiseLock()
@@ -59,14 +78,12 @@ public class Player : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            //bullet_.SetActive(true);
             GetComponent<Animator>().SetInteger("stage", ++stage);
         }
     }
 
     void extractRamRod()
     {
-        //bullet_.SetActive(false);
         if (Input.mouseScrollDelta.y > 1f)
         {
             GetComponent<Animator>().SetInteger("stage", ++stage);
@@ -110,7 +127,7 @@ public class Player : MonoBehaviour {
 
         Animator anim = GetComponent<Animator>();
 
-        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 || anim.GetCurrentAnimatorStateInfo(0).loop)
+        if ((anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && anim.GetCurrentAnimatorStateInfo(0).IsName(anim_names_[stage])) || stage == 1)
         {
             switch (stage)
             {
@@ -118,27 +135,30 @@ public class Player : MonoBehaviour {
                     checkFire();
                     break;
                 case 2:
-                    raiseLock();
+                    lowerGun();
                     break;
                 case 3:
-                    applyGunpowder();
+                    raiseLock();
                     break;
                 case 4:
-                    closeFrizzen();
+                    applyGunpowder();
                     break;
                 case 5:
-                    insertBullet();
+                    closeFrizzen();
                     break;
                 case 6:
-                    extractRamRod();
+                    insertBullet();
                     break;
                 case 7:
-                    insertRamRod();
+                    extractRamRod();
                     break;
                 case 8:
-                    retractRamRod();
+                    insertRamRod();
                     break;
                 case 9:
+                    retractRamRod();
+                    break;
+                case 10:
                     fullCock();
                     break;
                 default:
