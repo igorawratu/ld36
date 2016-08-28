@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager> {
     private Text score_text_;
 
     private int time_elapsed_ = 0;
-    private int max_time_ = 180;
+    private int max_time_ = 31;
 
     public bool played = false;
     private bool playing_ = false;
@@ -30,14 +30,14 @@ public class GameManager : Singleton<GameManager> {
         set {
             score_ = value;
 
-            score_text_.text = "Score: " + score_;
+            score_text_.text = "SCORE: " + score_;
             if (score_ == 3)
             {
-                score_text_.color = new Color(1, 1, 0);
+                score_text_.color = new Color(0.9f, 0.7f, 0.1f);
             }
             else if (score_ == 5)
             {
-                score_text_.color = new Color(0, 1, 0);
+                score_text_.color = new Color(0.1f, 0.7f, 0.1f);
             }
         }
     }
@@ -77,7 +77,10 @@ public class GameManager : Singleton<GameManager> {
         score_ = 0;
 
         int remaining = max_time_ - time_elapsed_++;
-        time_remaining_.text = "Time Remaining: " + remaining;
+        time_remaining_.text = "TIME REMANING: " + remaining;
+
+        time_remaining_.color = new Color(0.1f, 0.7f, 0.1f);
+        score_text_.color = new Color(0.7f, 0.1f, 0.1f);
 
         StartCoroutine("displayTimeRemaining");
     }
@@ -130,17 +133,17 @@ public class GameManager : Singleton<GameManager> {
         {
             yield return new WaitForSeconds(1f);
             int remaining = max_time_ - time_elapsed_++;
-            time_remaining_.text = "Time Remaining: " + remaining;
+            time_remaining_.text = "TIME REMAINING: " + remaining;
             if(remaining == 30)
             {
-                time_remaining_.color = new Color(1, 1, 0);
+                time_remaining_.color = new Color(0.9f, 0.7f, 0.1f);
             }
             else if(remaining == 10)
             {
-                time_remaining_.color = new Color(1, 0, 0);
+                time_remaining_.color = new Color(0.7f, 0.1f, 0.1f);
             }
 
-            if(remaining < 0)
+            if(remaining <= 0)
             {
                 playing_ = false;
                 Application.LoadLevel("StartScreen");

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
@@ -8,16 +8,24 @@ public class Player : MonoBehaviour {
 
     public Musket musket;
 
-    private int clicks_required = 15;
-    private int num_clicks = 0;
-
     public GameObject bullet_;
 
     private GameManager manager_;
     private string[] anim_names_;
+    public List<string> instructions_;
+    public List<Sprite> instruction_pics_;
 
     public Text _timeRemainingText;
     public Text _scoreText;
+
+    public GameObject _cockMusketSound;
+    public GameObject _closeFrizzenSound;
+
+    public Image _prompt;
+    public Text _instruction;
+
+    private float x_rot = 0f;
+    private float y_rot = 0f;
 
     void Start () {
         last_mouse_pos_ = Input.mousePosition;
@@ -47,20 +55,54 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             musket.fire();
-            //GetComponent<Animator>().SetInteger("stage", ++stage);
+            GetComponent<Animator>().SetInteger("stage", ++stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+
+            if(_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
     void lowerGun()
     {
         GetComponent<Animator>().SetInteger("stage", ++stage);
+        _prompt.sprite = instruction_pics_[stage];
+        _instruction.text = instructions_[stage];
+
+        if (_prompt.sprite == null)
+        {
+            _prompt.color = new Color(0, 0, 0, 0);
+        }
+        else
+        {
+            _prompt.color = new Color(1, 1, 1, 1);
+        }
     }
 
     void raiseLock()
     {
-        if(Input.mouseScrollDelta.y < -1f)
+        if(Input.GetKeyDown(KeyCode.R))
         {
+            Instantiate(_cockMusketSound);
             GetComponent<Animator>().SetInteger("stage", ++stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+
+            if (_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
@@ -69,6 +111,17 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.G))
         {
             GetComponent<Animator>().SetInteger("stage", ++stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+
+            if (_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
@@ -76,7 +129,19 @@ public class Player : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            Instantiate(_closeFrizzenSound);
             GetComponent<Animator>().SetInteger("stage", ++stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+
+            if (_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
@@ -85,6 +150,17 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.I))
         {
             GetComponent<Animator>().SetInteger("stage", ++stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+
+            if (_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
@@ -93,20 +169,36 @@ public class Player : MonoBehaviour {
         if (Input.mouseScrollDelta.y > 1f)
         {
             GetComponent<Animator>().SetInteger("stage", ++stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+
+            if (_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
     void insertRamRod()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.mouseScrollDelta.y < -1f)
         {
-            num_clicks++;
-        }
-
-        if(num_clicks > clicks_required)
-        {
-            num_clicks = 0;
             GetComponent<Animator>().SetInteger("stage", ++stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+
+            if (_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
@@ -115,6 +207,17 @@ public class Player : MonoBehaviour {
         if (Input.mouseScrollDelta.y < -1f)
         {
             GetComponent<Animator>().SetInteger("stage", ++stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+            if (_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
+
         }
     }
 
@@ -123,12 +226,30 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R))
         {
             stage = 1;
+            Instantiate(_cockMusketSound);
             GetComponent<Animator>().SetInteger("stage", stage);
+            _prompt.sprite = instruction_pics_[stage];
+            _instruction.text = instructions_[stage];
+
+            if (_prompt.sprite == null)
+            {
+                _prompt.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                _prompt.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            _prompt.enabled = !_prompt.enabled;
+            _instruction.enabled = !_instruction.enabled;
+        }
+
         Vector3 dif = Input.mousePosition - last_mouse_pos_;
 
         Animator anim = GetComponent<Animator>();
@@ -173,11 +294,17 @@ public class Player : MonoBehaviour {
         }
         
 
-        float y_rot = dif.x * Mathf.PI * Time.deltaTime * 5;
-        float x_rot = -dif.y * Mathf.PI * Time.deltaTime * 5;
+        float d_y_rot = dif.x * Mathf.PI * Time.deltaTime * 5;
+        float d_x_rot = -dif.y * Mathf.PI * Time.deltaTime * 5;
 
-        gameObject.transform.Rotate(Vector3.up, y_rot, Space.World);
-        gameObject.transform.Rotate(Vector3.right, x_rot);
+        d_x_rot = Mathf.Clamp(d_x_rot + x_rot, -90f, 20f) - x_rot;
+        d_y_rot = Mathf.Clamp(d_y_rot + y_rot, -90f, 90f) - y_rot;
+
+        x_rot += d_x_rot;
+        y_rot += d_y_rot;
+
+        gameObject.transform.Rotate(Vector3.up, d_y_rot, Space.World);
+        gameObject.transform.Rotate(Vector3.right, d_x_rot);
 
         last_mouse_pos_ = Input.mousePosition;
     }
