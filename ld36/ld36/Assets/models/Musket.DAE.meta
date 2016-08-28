@@ -1,0 +1,127 @@
+fileFormatVersion: 2
+guid: 3a06b68b9786d3e49864ec574287bccd
+timeCreated: 1472409381
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Barrel
+    100002: Buttplate
+    100004: Flint
+    100006: Frizzen
+    100008: Hammer
+    100010: //RootNode
+    100012: Ramrod
+    100014: Ramrod_Mount
+    100016: Side_Plate
+    100018: Trigger
+    100020: Trigger_Guard
+    400000: Barrel
+    400002: Buttplate
+    400004: Flint
+    400006: Frizzen
+    400008: Hammer
+    400010: //RootNode
+    400012: Ramrod
+    400014: Ramrod_Mount
+    400016: Side_Plate
+    400018: Trigger
+    400020: Trigger_Guard
+    2300000: Barrel
+    2300002: Buttplate
+    2300004: Flint
+    2300006: Frizzen
+    2300008: Hammer
+    2300010: //RootNode
+    2300012: Ramrod
+    2300014: Ramrod_Mount
+    2300016: Side_Plate
+    2300018: Trigger
+    2300020: Trigger_Guard
+    3300000: Barrel
+    3300002: Buttplate
+    3300004: Flint
+    3300006: Frizzen
+    3300008: Hammer
+    3300010: //RootNode
+    3300012: Ramrod
+    3300014: Ramrod_Mount
+    3300016: Side_Plate
+    3300018: Trigger
+    3300020: Trigger_Guard
+    4300000: Stock
+    4300002: Buttplate
+    4300004: Trigger_Guard
+    4300006: Trigger
+    4300008: Side_Plate
+    4300010: Hammer
+    4300012: Flint
+    4300014: Frizzen
+    4300016: Barrel
+    4300018: Ramrod
+    4300020: Ramrod_Mount
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
