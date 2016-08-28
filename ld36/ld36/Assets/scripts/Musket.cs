@@ -5,7 +5,6 @@ public class Musket : MonoBehaviour {
     public GameObject bullet_prefab_;
     public GameObject tip;
     public GameObject explosion;
-
 	void Start () {
 	
 	}
