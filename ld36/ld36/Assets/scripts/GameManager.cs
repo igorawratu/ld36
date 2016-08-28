@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager> {
     private int score_ = 0;
@@ -14,11 +15,43 @@ public class GameManager : Singleton<GameManager> {
 
     private GameObject target_;
     private GameObject player_;
+    private Text time_remaining_;
+    private Text score_text_;
+
+    private int time_elapsed_ = 0;
+    private int max_time_ = 180;
+
+    public bool played = false;
+    private bool playing_ = false;
 
     public int Score
     {
         get { return score_; }
-        set { score_ = value; }
+        set {
+            score_ = value;
+
+            score_text_.text = "Score: " + score_;
+            if (score_ == 3)
+            {
+                score_text_.color = new Color(1, 1, 0);
+            }
+            else if (score_ == 5)
+            {
+                score_text_.color = new Color(0, 1, 0);
+            }
+        }
+    }
+
+    public Text TimeRemaining
+    {
+        get { return time_remaining_; }
+        set { time_remaining_ = value; }
+    }
+
+    public Text ScoreText
+    {
+        get { return score_text_; }
+        set { score_text_ = value; }
     }
 
     public GameObject Player
@@ -29,9 +62,26 @@ public class GameManager : Singleton<GameManager> {
 
 	// Use this for initialization
 	void Start () {
-        target_ = (GameObject)Resources.Load("Target");
-	}
+        
+
+    }
 	
+    public void startGame()
+    {
+        played = true;
+        playing_ = true;
+
+        target_ = (GameObject)Resources.Load("Target");
+
+        time_elapsed_ = 0;
+        score_ = 0;
+
+        int remaining = max_time_ - time_elapsed_++;
+        time_remaining_.text = "Time Remaining: " + remaining;
+
+        StartCoroutine("displayTimeRemaining");
+    }
+
     private void spawnTarget()
     {
         float d = Random.value * (dist_max_ - dist_min_) + dist_min_;
@@ -55,16 +105,48 @@ public class GameManager : Singleton<GameManager> {
 
         target.GetComponent<Target>().Velocity = dir * (Random.value * (vel_max_ - vel_min_) + vel_min_);
         target.GetComponent<Target>().Player = player_;
+
+        
     }
 
 	// Update is called once per frame
 	void Update () {
-        spawnTime += Time.deltaTime;
-        if(spawnTime > spawnRate)
+        if (playing_)
         {
-            spawnTime = 0f;
+            spawnTime += Time.deltaTime;
 
-            spawnTarget();
+            if (spawnTime > spawnRate)
+            {
+                spawnTime = 0f;
+
+                spawnTarget();
+            }
         }
 	}
+
+    IEnumerator displayTimeRemaining()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            int remaining = max_time_ - time_elapsed_++;
+            time_remaining_.text = "Time Remaining: " + remaining;
+            if(remaining == 30)
+            {
+                time_remaining_.color = new Color(1, 1, 0);
+            }
+            else if(remaining == 10)
+            {
+                time_remaining_.color = new Color(1, 0, 0);
+            }
+
+            if(remaining < 0)
+            {
+                playing_ = false;
+                Application.LoadLevel("StartScreen");
+                break;
+            }
+        }
+
+    }
 }

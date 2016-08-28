@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
     private int stage = 1;
     private Vector3 last_mouse_pos_;
 
     public Musket musket;
-
-    private float ramrod_pos_ = 0f;
 
     private int clicks_required = 15;
     private int num_clicks = 0;
@@ -17,10 +16,17 @@ public class Player : MonoBehaviour {
     private GameManager manager_;
     private string[] anim_names_;
 
+    public Text _timeRemainingText;
+    public Text _scoreText;
+
     void Start () {
         last_mouse_pos_ = Input.mousePosition;
         manager_ = GameManager.Instance;
         manager_.Player = gameObject;
+        manager_.TimeRemaining = _timeRemainingText;
+        manager_.ScoreText = _scoreText;
+
+        manager_.startGame();
 
         anim_names_ = new string[11];
         anim_names_[0] = "";
@@ -41,7 +47,7 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             musket.fire();
-            GetComponent<Animator>().SetInteger("stage", ++stage);
+            //GetComponent<Animator>().SetInteger("stage", ++stage);
         }
     }
 

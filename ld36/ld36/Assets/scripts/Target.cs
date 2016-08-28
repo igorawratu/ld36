@@ -5,6 +5,7 @@ public class Target : MonoBehaviour {
     private Vector3 velocity_ = Vector3.forward;
     private GameObject player_;
     private float despawnLimit = 250f;
+    public GameObject _explosionEffect;
 
     public Vector3 Velocity
     {
@@ -38,6 +39,8 @@ public class Target : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         GameManager.Instance.Score = GameManager.Instance.Score + 1;
+        GameObject e = Instantiate(_explosionEffect);
+        e.transform.position = gameObject.transform.position;
         Destroy(gameObject);
     }
 }
