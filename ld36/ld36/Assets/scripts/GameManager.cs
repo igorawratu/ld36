@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager> {
     private Text score_text_;
 
     private int time_elapsed_ = 0;
-    private int max_time_ = 31;
+    private int max_time_ = 180;
 
     public bool played = false;
     private bool playing_ = false;
