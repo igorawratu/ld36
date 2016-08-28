@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager> {
     private int score_ = 0;
+    private int high_score_ = 0;
 
     private float spawnRate = 5f;
     private float spawnTime = 0f;
@@ -24,6 +25,8 @@ public class GameManager : Singleton<GameManager> {
     public bool played = false;
     private bool playing_ = false;
 
+    private bool nhs_ = false;
+
     public int Score
     {
         get { return score_; }
@@ -31,15 +34,28 @@ public class GameManager : Singleton<GameManager> {
             score_ = value;
 
             score_text_.text = "SCORE: " + score_;
-            if (score_ == 3)
-            {
-                score_text_.color = new Color(0.9f, 0.7f, 0.1f);
-            }
-            else if (score_ == 5)
+
+            if (score_ == 5)
             {
                 score_text_.color = new Color(0.1f, 0.7f, 0.1f);
             }
+
+            if(score_ > high_score_)
+            {
+                high_score_ = score_;
+                nhs_ = true;
+            }
         }
+    }
+
+    public bool NewHighScore
+    {
+        get { return nhs_; }
+    }
+
+    public int HighScore
+    {
+        get { return high_score_; }
     }
 
     public Text TimeRemaining
@@ -68,6 +84,7 @@ public class GameManager : Singleton<GameManager> {
 	
     public void startGame()
     {
+        nhs_ = false;
         played = true;
         playing_ = true;
 
@@ -134,11 +151,7 @@ public class GameManager : Singleton<GameManager> {
             yield return new WaitForSeconds(1f);
             int remaining = max_time_ - time_elapsed_++;
             time_remaining_.text = "TIME REMAINING: " + remaining;
-            if(remaining == 30)
-            {
-                time_remaining_.color = new Color(0.9f, 0.7f, 0.1f);
-            }
-            else if(remaining == 10)
+            if(remaining == 10)
             {
                 time_remaining_.color = new Color(0.7f, 0.1f, 0.1f);
             }
