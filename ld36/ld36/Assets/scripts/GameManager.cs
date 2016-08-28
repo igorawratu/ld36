@@ -6,12 +6,12 @@ public class GameManager : Singleton<GameManager> {
     private int score_ = 0;
     private int high_score_ = 0;
 
-    private float spawnRate = 5f;
-    private float spawnTime = 0f;
+    private float spawnRate = 12.5f;
+    private float spawnTime = 10f;
 
-    private float dist_max_ = 100f;
+    private float dist_max_ = 75f;
     private float dist_min_ = 50f;
-    private float vel_min_ = 2f;
+    private float vel_min_ = 5f;
     private float vel_max_ = 10f;
 
     private GameObject target_;
@@ -46,6 +46,12 @@ public class GameManager : Singleton<GameManager> {
                 nhs_ = true;
             }
         }
+    }
+
+    public GameObject Target
+    {
+        get { return target_; }
+        set { target_ = value; }
     }
 
     public bool NewHighScore
@@ -87,8 +93,6 @@ public class GameManager : Singleton<GameManager> {
         nhs_ = false;
         played = true;
         playing_ = true;
-
-        target_ = (GameObject)Resources.Load("Target");
 
         time_elapsed_ = 0;
         score_ = 0;

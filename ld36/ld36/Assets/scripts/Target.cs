@@ -38,6 +38,7 @@ public class Target : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Entering");
         GameManager.Instance.Score = GameManager.Instance.Score + 1;
         GameObject e = Instantiate(_explosionEffect);
         e.transform.position = gameObject.transform.position;

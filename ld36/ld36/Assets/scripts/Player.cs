@@ -8,13 +8,12 @@ public class Player : MonoBehaviour {
 
     public Musket musket;
 
-    public GameObject bullet_;
-
     private GameManager manager_;
     private string[] anim_names_;
     public List<string> instructions_;
     public List<Sprite> instruction_pics_;
-
+    public GameObject target_;
+    
     public Text _timeRemainingText;
     public Text _scoreText;
 
@@ -33,6 +32,7 @@ public class Player : MonoBehaviour {
         manager_.Player = gameObject;
         manager_.TimeRemaining = _timeRemainingText;
         manager_.ScoreText = _scoreText;
+        manager_.Target = target_;
 
         manager_.startGame();
 

@@ -17,7 +17,7 @@ public class Musket : MonoBehaviour {
 
     public void fire()
     {
-        Vector3 direction = gameObject.transform.rotation * Vector3.left;
+        Vector3 direction = gameObject.transform.rotation * Vector3.down;
 
         GameObject bullet = Instantiate(bullet_prefab_);
         bullet.transform.position = tip.transform.position;
